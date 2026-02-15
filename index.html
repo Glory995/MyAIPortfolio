@@ -1,0 +1,1250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glory - AI Portfolio Assistant</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:wght@600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --orange-primary: #ff8b5b;
+        --orange-light: #ffb896;
+        --orange-pale: #fff4ef;
+        --charcoal: #2b2b2b;
+        --warm-gray: #6b6b6b;
+        --cream: #fff9f5;
+        --white: #ffffff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--cream);
+        color: var(--charcoal);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Navigation */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem 5%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 249, 245, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 100;
+        border-bottom: 1px solid rgba(255, 139, 91, 0.1);
+      }
+
+      .logo {
+        font-family: "Fraunces", serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--charcoal);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 3rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--warm-gray);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: color 0.3s;
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--orange-primary);
+        transition: width 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: var(--orange-primary);
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* Hero Section */
+      .hero {
+        margin-top: 80px;
+        padding: 8rem 5% 6rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        position: relative;
+      }
+
+      .hero-content {
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 0.5rem 1.25rem;
+        background: var(--white);
+        border: 2px solid var(--orange-primary);
+        border-radius: 50px;
+        color: var(--orange-primary);
+        font-weight: 600;
+        font-size: 0.875rem;
+        margin-bottom: 2rem;
+        animation: fadeInUp 0.8s ease-out 0.2s backwards;
+      }
+
+      h1 {
+        font-family: "Fraunces", serif;
+        font-size: 4.5rem;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        font-weight: 900;
+        animation: fadeInUp 0.8s ease-out 0.3s backwards;
+      }
+
+      h1 .highlight {
+        color: var(--orange-primary);
+        display: block;
+      }
+
+      .subtitle {
+        font-size: 1.5rem;
+        color: var(--charcoal);
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        animation: fadeInUp 0.8s ease-out 0.4s backwards;
+      }
+
+      .description {
+        font-size: 1.125rem;
+        color: var(--warm-gray);
+        line-height: 1.7;
+        margin-bottom: 3rem;
+        max-width: 500px;
+        animation: fadeInUp 0.8s ease-out 0.5s backwards;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1.5rem;
+        animation: fadeInUp 0.8s ease-out 0.6s backwards;
+      }
+
+      .btn {
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: none;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-primary {
+        background: var(--orange-primary);
+        color: var(--white);
+        box-shadow: 0 10px 30px rgba(255, 139, 91, 0.25);
+      }
+
+      .btn-primary:hover {
+        background: var(--orange-light);
+        transform: translateY(-2px);
+        box-shadow: 0 15px 40px rgba(255, 139, 91, 0.35);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--charcoal);
+        border: 2px solid var(--charcoal);
+      }
+
+      .btn-secondary:hover {
+        background: var(--charcoal);
+        color: var(--white);
+        transform: translateY(-2px);
+      }
+
+      /* Hero Image */
+      .hero-visual {
+        position: relative;
+        animation: fadeIn 1s ease-out 0.4s backwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .hero-circle {
+        width: 500px;
+        height: 500px;
+        background: linear-gradient(
+          135deg,
+          var(--orange-light) 0%,
+          var(--orange-primary) 100%
+        );
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      .floating-stats {
+        position: absolute;
+        background: var(--white);
+        padding: 1.5rem 2rem;
+        border-radius: 20px;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      .stat-1 {
+        top: 10%;
+        right: -10%;
+        animation-delay: 0s;
+      }
+
+      .stat-2 {
+        bottom: 15%;
+        left: -15%;
+        animation-delay: 1s;
+      }
+
+      .stars {
+        color: var(--orange-primary);
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-value {
+        font-family: "Fraunces", serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--charcoal);
+        margin-bottom: 0.25rem;
+      }
+
+      .stat-label {
+        color: var(--warm-gray);
+        font-size: 0.875rem;
+      }
+
+      /* Services Section */
+      .services {
+        padding: 6rem 5%;
+        background: var(--white);
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .section-tag {
+        color: var(--orange-primary);
+        font-weight: 600;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 1rem;
+      }
+
+      .section-title {
+        font-family: "Fraunces", serif;
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--charcoal);
+        margin-bottom: 1rem;
+      }
+
+      .section-description {
+        font-size: 1.125rem;
+        color: var(--warm-gray);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .service-card {
+        background: var(--cream);
+        padding: 3rem 2.5rem;
+        border-radius: 30px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        border: 2px solid transparent;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--orange-primary);
+        background: var(--white);
+        box-shadow: 0 20px 60px rgba(255, 139, 91, 0.15);
+      }
+
+      .service-icon {
+        width: 70px;
+        height: 70px;
+        background: var(--orange-primary);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        transition: all 0.4s;
+      }
+
+      .service-card:hover .service-icon {
+        transform: scale(1.1) rotate(5deg);
+      }
+
+      .service-title {
+        font-family: "Fraunces", serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--charcoal);
+        margin-bottom: 1rem;
+      }
+
+      .service-description {
+        color: var(--warm-gray);
+        line-height: 1.7;
+      }
+
+      /* Quick Questions */
+      .quick-questions {
+        padding: 6rem 5%;
+        background: var(--orange-pale);
+      }
+
+      .questions-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .questions-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-top: 3rem;
+      }
+
+      .question-card {
+        background: var(--white);
+        padding: 2rem 2.5rem;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: 2px solid transparent;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .question-card:hover {
+        border-color: var(--orange-primary);
+        transform: translateX(10px);
+        box-shadow: 0 10px 40px rgba(255, 139, 91, 0.1);
+      }
+
+      .question-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--orange-pale);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+      }
+
+      .question-text {
+        font-size: 1.125rem;
+        font-weight: 500;
+        color: var(--charcoal);
+      }
+
+      /* Chat Widget */
+      #chat-widget {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 1000;
+      }
+
+      #chat-toggle {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          var(--orange-primary) 0%,
+          var(--orange-light) 100%
+        );
+        border: none;
+        color: var(--white);
+        font-size: 32px;
+        cursor: pointer;
+        box-shadow: 0 10px 40px rgba(255, 139, 91, 0.4);
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #chat-toggle:hover {
+        transform: scale(1.1);
+        box-shadow: 0 15px 50px rgba(255, 139, 91, 0.5);
+      }
+
+      #chat-window {
+        position: absolute;
+        bottom: 90px;
+        right: 0;
+        width: 420px;
+        height: 650px;
+        background: var(--white);
+        border-radius: 30px;
+        box-shadow: 0 20px 80px rgba(0, 0, 0, 0.2);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      #chat-window.active {
+        display: flex;
+        animation: slideUp 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px) scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      #chat-header {
+        background: linear-gradient(
+          135deg,
+          var(--orange-primary) 0%,
+          var(--orange-light) 100%
+        );
+        color: var(--white);
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .chat-header-content {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .bot-avatar-large {
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        overflow: hidden;
+      }
+
+      .bot-avatar-large img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .chat-header-text h3 {
+        margin: 0;
+        font-family: "Fraunces", serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      .chat-header-text p {
+        margin: 5px 0 0 0;
+        font-size: 0.875rem;
+        opacity: 0.95;
+      }
+
+      #chat-close {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: var(--white);
+        font-size: 28px;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        transition: all 0.3s;
+      }
+
+      #chat-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: rotate(90deg);
+      }
+
+      #chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 2rem;
+        background: var(--cream);
+      }
+
+      #chat-messages::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      #chat-messages::-webkit-scrollbar-thumb {
+        background: var(--orange-primary);
+        border-radius: 3px;
+      }
+
+      .message {
+        margin-bottom: 1.5rem;
+        animation: messageIn 0.4s ease-out;
+      }
+
+      @keyframes messageIn {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .message.bot {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .message.user {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .bot-avatar {
+        width: 40px;
+        height: 40px;
+        background: var(--orange-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+
+      .bot-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .message-content {
+        max-width: 75%;
+        padding: 1rem 1.25rem;
+        border-radius: 20px;
+        word-wrap: break-word;
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+
+      .message.bot .message-content {
+        background: var(--white);
+        color: var(--charcoal);
+        border-bottom-left-radius: 5px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .message.user .message-content {
+        background: var(--orange-primary);
+        color: var(--white);
+        border-bottom-right-radius: 5px;
+      }
+
+      #chat-input-area {
+        padding: 1.5rem;
+        background: var(--white);
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      #chat-input-form {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      #chat-input {
+        flex: 1;
+        padding: 1rem 1.5rem;
+        border: 2px solid var(--orange-pale);
+        border-radius: 25px;
+        font-size: 0.95rem;
+        outline: none;
+        transition: all 0.3s;
+        font-family: "DM Sans", sans-serif;
+      }
+
+      #chat-input:focus {
+        border-color: var(--orange-primary);
+        background: var(--cream);
+      }
+
+      #chat-send {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--orange-primary);
+        border: none;
+        color: var(--white);
+        font-size: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #chat-send:hover:not(:disabled) {
+        background: var(--orange-light);
+        transform: scale(1.1);
+      }
+
+      #chat-send:disabled {
+        background: var(--warm-gray);
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+
+      .typing-indicator {
+        display: flex;
+        align-items: center;
+        padding: 1rem 1.25rem;
+        background: var(--white);
+        border-radius: 20px;
+        border-bottom-left-radius: 5px;
+        max-width: 70px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .typing-indicator span {
+        width: 10px;
+        height: 10px;
+        background: var(--orange-primary);
+        border-radius: 50%;
+        margin: 0 3px;
+        animation: typing 1.4s infinite;
+      }
+
+      .typing-indicator span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .typing-indicator span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes typing {
+        0%,
+        60%,
+        100% {
+          transform: translateY(0);
+          opacity: 0.7;
+        }
+        30% {
+          transform: translateY(-12px);
+          opacity: 1;
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .hero {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .hero-content {
+          order: 2;
+        }
+
+        .hero-visual {
+          order: 1;
+          display: flex;
+          justify-content: center;
+        }
+
+        .hero-circle {
+          width: 400px;
+          height: 400px;
+        }
+
+        .description {
+          margin: 0 auto 3rem;
+        }
+
+        .cta-buttons {
+          justify-content: center;
+        }
+
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .questions-grid {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 3rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          gap: 1.5rem;
+        }
+
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        .subtitle {
+          font-size: 1.25rem;
+        }
+
+        .hero-circle {
+          width: 300px;
+          height: 300px;
+        }
+
+        .floating-stats {
+          padding: 1rem 1.5rem;
+        }
+
+        .stat-value {
+          font-size: 1.5rem;
+        }
+
+        #chat-window {
+          width: calc(100vw - 40px);
+          height: calc(100vh - 120px);
+          right: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">GLORY</div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="badge">✨ AI ASSISTANT</div>
+        <h1>I'm <span class="highlight">Glory</span></h1>
+        <div class="subtitle">Meet My Personal AI Assistant</div>
+        <p class="description">
+          Want to know about my experience, skills, projects, or interests? My
+          AI assistant has all the answers! Powered by RAG technology, it can
+          tell you everything about my professional journey.
+        </p>
+        <div class="cta-buttons">
+          <button class="btn btn-primary" onclick="openChat()">
+            Start Chatting
+          </button>
+          <a href="#services" class="btn btn-secondary">Learn More</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-circle">
+          <!-- Replace this src with your actual image path -->
+          <img src="about_me\DSC_0463.jpg" alt="Glory" class="hero-image" />
+        </div>
+        <div class="floating-stats stat-1">
+          <div class="stars">★★★★★</div>
+          <div class="stat-value"> 3+ Years</div>
+          <div class="stat-label">Experience</div>
+        </div>
+        <div class="floating-stats stat-2">
+          <div class="stars">🤖</div>
+          <div class="stat-value">AI Powered</div>
+          <div class="stat-label">Smart Assistant</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+      <div class="section-header">
+        <div class="section-tag">DISCOVER</div>
+        <h2 class="section-title">What Can You Learn?</h2>
+        <p class="section-description">
+          My AI assistant knows everything about my professional background and
+          can answer any questions you have
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">💼</div>
+          <h3 class="service-title">Professional Experience</h3>
+          <p class="service-description">
+            My work history, years of experience, and career highlights across
+            different roles and companies
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🛠️</div>
+          <h3 class="service-title">Technical Skills</h3>
+          <p class="service-description">
+            Programming languages, frameworks, tools, and technologies I work
+            with on a daily basis
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🚀</div>
+          <h3 class="service-title">Projects & Portfolio</h3>
+          <p class="service-description">
+            Cool things I've built, contributions I've made, and my complete
+            project portfolio
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🎓</div>
+          <h3 class="service-title">Education</h3>
+          <p class="service-description">
+            My academic background, certifications, continuous learning, and
+            professional development
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">❤️</div>
+          <h3 class="service-title">Interests & Hobbies</h3>
+          <p class="service-description">
+            What I love to do outside of work, my passions, and what drives me
+            every day
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">📧</div>
+          <h3 class="service-title">Get in Touch</h3>
+          <p class="service-description">
+            How to connect with me for opportunities, collaborations, and
+            professional networking
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Questions Section -->
+    <section class="quick-questions" id="experience">
+      <div class="questions-container">
+        <div class="section-header">
+          <div class="section-tag">TRY ASKING</div>
+          <h2 class="section-title">Quick Questions</h2>
+          <p class="section-description">
+            Click any question below to get instant answers from my AI assistant
+          </p>
+        </div>
+
+        <div class="questions-grid">
+          <div
+            class="question-card"
+            onclick="
+              askQuestion(this.querySelector('.question-text').textContent)
+            "
+          >
+            <div class="question-icon">💼</div>
+            <div class="question-text">
+              What is Glory's professional experience?
+            </div>
+          </div>
+
+          <div
+            class="question-card"
+            onclick="
+              askQuestion(this.querySelector('.question-text').textContent)
+            "
+          >
+            <div class="question-icon">💻</div>
+            <div class="question-text">
+              What technologies does Glory work with?
+            </div>
+          </div>
+
+          <div
+            class="question-card"
+            onclick="
+              askQuestion(this.querySelector('.question-text').textContent)
+            "
+          >
+            <div class="question-icon">🚀</div>
+            <div class="question-text">Tell me about Glory's projects</div>
+          </div>
+
+          <div
+            class="question-card"
+            onclick="
+              askQuestion(this.querySelector('.question-text').textContent)
+            "
+          >
+            <div class="question-icon">❤️</div>
+            <div class="question-text">
+              What are Glory's interests and hobbies?
+            </div>
+          </div>
+
+          <div
+            class="question-card"
+            onclick="
+              askQuestion(this.querySelector('.question-text').textContent)
+            "
+          >
+            <div class="question-icon">🎯</div>
+            <div class="question-text">
+              Is Glory available for opportunities?
+            </div>
+          </div>
+
+          <div
+            class="question-card"
+            onclick="
+              askQuestion(this.querySelector('.question-text').textContent)
+            "
+          >
+            <div class="question-icon">✨</div>
+            <div class="question-text">What makes Glory unique?</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chat Widget -->
+    <div id="chat-widget">
+      <button id="chat-toggle">💬</button>
+      <div id="chat-window">
+        <div id="chat-header">
+          <div class="chat-header-content">
+            <div class="bot-avatar-large">
+              <!-- Replace this src with your actual image path -->
+              <img src="about_me\DSC_0463.jpg" alt="Glory's Assistant" />
+            </div>
+            <div class="chat-header-text">
+              <h3>Glory's AI Assistant</h3>
+              <p>Ask me anything!</p>
+            </div>
+          </div>
+          <button id="chat-close">×</button>
+        </div>
+        <div id="chat-messages">
+          <div class="message bot">
+            <div class="bot-avatar">
+              <!-- Replace this src with your actual image path -->
+              <img src="about_me\DSC_0463.jpg" alt="Glory's Assistant" />
+            </div>
+            <div class="message-content">
+              Hello! 👋 I'm Glory's AI Personal Assistant. I'm here to tell you
+              all about Glory - their experience, skills, projects, and what
+              makes them unique. What would you like to know?
+            </div>
+          </div>
+        </div>
+        <div id="chat-input-area">
+          <form id="chat-input-form">
+            <input
+              type="text"
+              id="chat-input"
+              placeholder="Ask me anything about Glory..."
+              autocomplete="off"
+            />
+            <button type="submit" id="chat-send">
+              <span>➤</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Configuration
+      const API_BASE = 'https://glory-portfolio-api.onrender.com';  
+    //   "http://localhost:8000";
+      let sessionId =
+        localStorage.getItem("glory_chat_session") || generateSessionId();
+
+      function generateSessionId() {
+        const id =
+          "session_" +
+          Date.now() +
+          "_" +
+          Math.random().toString(36).substr(2, 9);
+        localStorage.setItem("glory_chat_session", id);
+        return id;
+      }
+
+      // DOM Elements
+      const chatToggle = document.getElementById("chat-toggle");
+      const chatWindow = document.getElementById("chat-window");
+      const chatClose = document.getElementById("chat-close");
+      const chatMessages = document.getElementById("chat-messages");
+      const chatInputForm = document.getElementById("chat-input-form");
+      const chatInput = document.getElementById("chat-input");
+      const chatSend = document.getElementById("chat-send");
+
+      // Open/Close Chat
+      function openChat() {
+        chatWindow.classList.add("active");
+        chatInput.focus();
+      }
+
+      function closeChat() {
+        chatWindow.classList.remove("active");
+      }
+
+      chatToggle.addEventListener("click", () => {
+        if (chatWindow.classList.contains("active")) {
+          closeChat();
+        } else {
+          openChat();
+        }
+      });
+
+      chatClose.addEventListener("click", closeChat);
+
+      // Add message to chat
+      function addMessage(content, isUser = false) {
+        const messageDiv = document.createElement("div");
+        messageDiv.className = `message ${isUser ? "user" : "bot"}`;
+
+        if (!isUser) {
+          const avatar = document.createElement("div");
+          avatar.className = "bot-avatar";
+          // Replace 'your-image.jpg' with your actual image path
+          avatar.innerHTML =
+            '<img src="about_me\\DSC_0463.jpg" alt="Glory\'s Assistant">';
+          messageDiv.appendChild(avatar);
+        }
+
+        const contentDiv = document.createElement("div");
+        contentDiv.className = "message-content";
+        contentDiv.textContent = content;
+        messageDiv.appendChild(contentDiv);
+
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      // Show typing indicator
+      function showTyping() {
+        const typingDiv = document.createElement("div");
+        typingDiv.className = "message bot";
+        typingDiv.id = "typing-indicator";
+
+        const avatar = document.createElement("div");
+        avatar.className = "bot-avatar";
+        // Replace 'your-image.jpg' with your actual image path
+        avatar.innerHTML =
+          '<img src="about_me\\DSC_0463.jpg" alt="Glory\'s Assistant">';
+        typingDiv.appendChild(avatar);
+
+        const indicator = document.createElement("div");
+        indicator.className = "typing-indicator";
+        indicator.innerHTML = "<span></span><span></span><span></span>";
+        typingDiv.appendChild(indicator);
+
+        chatMessages.appendChild(typingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      function hideTyping() {
+        const typing = document.getElementById("typing-indicator");
+        if (typing) typing.remove();
+      }
+
+      // Send message
+      async function sendMessage(message) {
+        if (!message.trim()) return;
+
+        addMessage(message, true);
+        chatInput.value = "";
+        chatSend.disabled = true;
+        showTyping();
+
+        try {
+          const response = await fetch(`${API_BASE}/chat`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              message: message,
+              session_id: sessionId,
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to get response from server");
+          }
+
+          const data = await response.json();
+          hideTyping();
+          addMessage(data.response);
+        } catch (error) {
+          hideTyping();
+          addMessage(
+            "Sorry, I encountered an error connecting to the server. Please make sure the API is running and try again.",
+            false,
+          );
+          console.error("Error:", error);
+        } finally {
+          chatSend.disabled = false;
+          chatInput.focus();
+        }
+      }
+
+      // Ask predefined question
+      function askQuestion(question) {
+        openChat();
+        setTimeout(() => {
+          chatInput.value = question;
+          sendMessage(question);
+        }, 300);
+      }
+
+      // Form submit
+      chatInputForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        sendMessage(chatInput.value);
+      });
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Keyboard shortcuts
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "/" && e.ctrlKey) {
+          e.preventDefault();
+          openChat();
+        }
+        if (e.key === "Escape" && chatWindow.classList.contains("active")) {
+          closeChat();
+        }
+      });
+
+      console.log("🤖 Glory's Portfolio Chatbot Loaded");
+      console.log("💡 Press Ctrl+/ to open chat or click the chat button");
+    </script>
+  </body>
+</html>
